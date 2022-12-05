@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	dat, err := os.Open("example.txt")
+	dat, err := os.Open("input.txt")
 
 	if err != nil {
 		panic(err)
@@ -21,12 +21,11 @@ func main() {
 	listOfElves = append(listOfElves, 0)
 
 	var counter = 0
-	var createNewElf = true
+	var createNewElf = false
 	for scanner.Scan() {
 		tempText := scanner.Text()
 		if tempText == "" {
 			counter++
-			fmt.Println("test")
 			createNewElf = true
 		} else {
 			tempInt, err := strconv.Atoi(tempText)
@@ -39,8 +38,7 @@ func main() {
 				listOfElves = append(listOfElves, tempInt)
 				createNewElf = false
 			} else {
-				listOfElves[counter] = tempInt + int(listOfElves[counter])
-				fmt.Println(listOfElves[counter])
+				listOfElves[counter] = tempInt + listOfElves[counter]
 			}
 		}
 		// listOfElves = append(listOfElves, tempText)
@@ -56,7 +54,6 @@ func main() {
 		}
 		counter++
 	}
-	fmt.Println(listOfElves)
 	fmt.Println("biggest: ", biggest)
 	fmt.Println("position: ", position)
 
